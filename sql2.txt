@@ -1,0 +1,15 @@
+create or replace procedure test(a in out int) is
+begin
+   dbms_output.put_line(a);
+   a:= a + 1;
+end;
+/
+set serveroutput on
+
+declare
+  a int := 3;
+begin
+   dbms_output.put_line(a);
+   test(a);
+   dbms_output.put_line(a);
+end;

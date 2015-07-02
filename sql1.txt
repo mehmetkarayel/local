@@ -1,0 +1,8 @@
+create function ortMaas(p_dept_id employees.department_id%type) 
+return employees.salary%type is
+  v_ort_maas employees.salary%type;
+begin
+  select avg(salary) into v_ort_maas from employees where department_id = p_dept_id;
+  return v_ort_maas;
+end;
+/
