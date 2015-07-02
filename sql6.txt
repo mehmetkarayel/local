@@ -1,0 +1,28 @@
+set serveroutput on
+declare
+  cursor cur_dept is 
+    select department_id, department_name from departments;
+  cursor cur_emp(v_dept_id employees.department_id%type) is 
+    select employee_id, first_name, last_name from employees 
+       where department_id = v_dept_id; 
+  v_dept cur_dept%rowtype;
+  v_emp cur_emp%rowtype;
+begin
+  open cur_dept;
+  loop
+     fetch cur_dept into v_dept;
+     exit when cur_dept%notfound;
+     dbms_output.put_line('NO: '||v_dept.department_id
+          ||' , Adi: '||v_dept.department_name);
+     open cur_emp(v_dept.department_id);
+     loop
+        fetch cur_emp into v_emp;
+        exit when cur_emp%notfound;
+        dbms_output.put_line('  Id:'||v_emp.employee_id||', Adi:'||v_emp.first_name
+           ||', Soyadi:'||v_emp.last_name);
+     end loop;
+     close cur_emp;
+  end loop;
+  close cur_dept;
+end;
+/

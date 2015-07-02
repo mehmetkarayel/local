@@ -1,0 +1,7 @@
+select count(*) Toplam ,
+sum(decode(extract(year from hire_date), 2002, 1,  0)) "2002",
+sum(decode(extract(year from hire_date), 2003, 1,  0)) "2003",
+sum(decode(extract(year from hire_date), 2004, 1,  0)) "2004",
+sum(decode(extract(year from hire_date), 2005, 1,  0)) "2005"
+
+from employees;

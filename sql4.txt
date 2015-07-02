@@ -1,0 +1,12 @@
+select count(*) from employees; -- 107
+
+select count(*) from employees 
+where employee_id in (select manager_id from employees); -- 18
+
+
+select count(*) from employees 
+where employee_id not in 
+(select manager_id from employees where manager_id is not null); -- 89?
+
+select * from employees where manager_id != null;
+select nvl(manager_id, -1) from employees;
